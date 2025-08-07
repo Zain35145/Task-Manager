@@ -1,0 +1,17 @@
+# Use official Java 17 image as base
+FROM openjdk:17-jdk-slim
+
+# Install Maven
+RUN apt-get update && apt-get install -y maven
+
+# Set working directory
+WORKDIR /app
+
+# Copy project files
+COPY . .
+
+# Build the project
+RUN mvn clean install
+
+# Run tests by default
+CMD ["mvn", "test"]
